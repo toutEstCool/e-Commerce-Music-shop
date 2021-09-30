@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Card = () => {
+import style from './Card.module.scss'
+
+const Card = ({ title, price, img, onPlus, onClickFavorites }) => {
+  const [addCard, setAddCard] = useState(false)
+  const [isFavorite, setIsFavorite] = useState(false)
+
+  const onClickPlus = () => {
+    onPlus({title, price, img})
+    setAddCard(!addCard)
+  }
+
+  const onClickFavorite = () => {
+    onClickFavorites({ title, price, img, onPlus })
+    setIsFavorite(!isFavorite)
+  }
   return (
-    <div className="card">
-          <div className="favorite">
-            <img src="/images/heartfalse.svg" alt="heart" />
+    <div className={style.card}>
+          <div className={style.favorite}>
+            <img onClick={onClickFavorite}  src={isFavorite ? '/images/hearttrue.svg'  : '/images/heartfalse.svg'}  />
           </div>
-          <img width={133} height={112} src="/images/music/1.jpg" alt="Music" />
+          <img width={133} height={112} src={img} alt="Music" />
           <h5>
-            Виниловый Альбом
-            Indie Music 1986
+            {title}
           </h5>
-          <div className="cardBottom">
-          <div className="cardPrice">
+          <div className={style.cardBottom}>
+          <div className={style.cardPrice}>
             <span>Цена:</span>
-            <b>12 999 сом.</b>
+            <b>{price} сом.</b>
           </div>
-          <button className="button">
-            <img width={11} height={11} src="/images/plus.svg" alt="plus"/>
+          <button className={style.button} onClick={() => onClickPlus()}>
+            <img width={30} height={30} src={addCard ? '/images/addCard.svg': '/images/plus.svg'} alt="plus"/>
           </button>
         </div>
       </div>

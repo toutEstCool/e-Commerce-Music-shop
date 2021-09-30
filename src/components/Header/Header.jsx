@@ -1,8 +1,11 @@
 import React from 'react';
 
-const Header = () => {
+import { Link } from 'react-router-dom'
+
+const Header = ({ onClickCart }) => {
   return (
     <header>
+      <Link to="/">
       <div className="headerLeft">
         <img width={40} height={40} src="/images/logo.png" alt="logo" />
         <div className="headerInfo">
@@ -10,10 +13,16 @@ const Header = () => {
           <p style={{opacity: '.5'}}>The most delicious music</p>
         </div>
       </div>
+      </Link>
         <ul className="headerRight">
-          <li>
+          <li style={{cursor: 'pointer'}} onClick={onClickCart}> 
             <img width={18} height={18} src="/images/cart.svg" alt="cart" />
             <span>1205 сом.</span>
+          </li>
+          <li style={{cursor: 'pointer'}}>
+            <Link to="/favorites">
+              <img src="/images/favorite.svg" alt="favorite" />
+            </Link>
           </li>
           <li>
             <img width={18} height={18} src="/images/user.svg" alt="user" />
