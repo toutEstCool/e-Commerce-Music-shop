@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom'
 
-const Header = ({ onClickCart }) => {
+const Header = ({ onClickCart, allPrice }) => {
   return (
     <header>
       <Link to="/">
@@ -17,7 +17,7 @@ const Header = ({ onClickCart }) => {
         <ul className="headerRight">
           <li style={{cursor: 'pointer'}} onClick={onClickCart}> 
             <img width={18} height={18} src="/images/cart.svg" alt="cart" />
-            <span>1205 сом.</span>
+            <span>{allPrice > 0 ? `${allPrice} сом.`: null}</span>
           </li>
           <li style={{cursor: 'pointer'}}>
             <Link to="/favorites">

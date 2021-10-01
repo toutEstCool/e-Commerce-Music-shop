@@ -1,6 +1,7 @@
 import React from 'react';
+import Card from '../components/Card/Card';
 
-const Favorites = () => {
+const Favorites = ({ favorites, onAddFavorites, onAddToCart }) => {
     return (
         <div className="content">
         <div
@@ -15,7 +16,20 @@ const Favorites = () => {
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap" }}>
-
+          {
+            favorites.map(item => (
+              <Card
+                key={`${item.title}_${item.id}`}
+                id={item.id}
+                title={item.title}
+                price={item.price}
+                img={item.img}
+                onClickFavorites={onAddFavorites}
+                onPlus={onAddToCart}
+                stateHeart={true}
+              />
+            ))
+          }
         </div>
       </div>
     );

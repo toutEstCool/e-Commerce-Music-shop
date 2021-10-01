@@ -1,7 +1,8 @@
 import React from 'react';
 
-const SideBar = ({ onClose, items = [], removeItem }) => {
-  console.log(items);
+const SideBar = ({ onClose, items = [], removeItem, allPrice }) => {
+const nds = allPrice * 0.007
+
   return (
     <div className="sideBarBlock">
     <div className="sideBar">
@@ -27,12 +28,12 @@ const SideBar = ({ onClose, items = [], removeItem }) => {
         <li>
           <span>Итого:</span>
           <div></div>
-          <b>21 498 сом.</b>
+          <b>{allPrice} сом.</b>
         </li>
         <li>
           <span>Ндс 7%:</span>
           <div></div>
-          <b>1074 сом.</b>
+          <b>{Math.round(nds)} сом.</b>
         </li>
       </ul>
     <button className="myButton">Оформить заказ <img src="/images/arrow.svg" alt="arrow"/></button>

@@ -3,7 +3,7 @@ import React from 'react';
 import Card from '../components/Card/Card'
 
 
-const Home = ({ items, searchValue, setSearchValue,  onAddFavorites, onAddToCart }) => {
+const Home = ({ items, searchValue, setSearchValue, onAddFavorites, onAddToCart }) => {
     return (
         <div className="content">
         <div
@@ -31,6 +31,7 @@ const Home = ({ items, searchValue, setSearchValue,  onAddFavorites, onAddToCart
           {items.filter(title => title.title.toLowerCase().includes(searchValue.toLowerCase())).map((item, index) => (
             <Card
               key={index}
+              id={item.id}
               title={item.title}
               price={item.price}
               img={item.imgURL}
