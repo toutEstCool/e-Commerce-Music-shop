@@ -7,34 +7,53 @@ import SideBar from "./components/SideBar/SideBar";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
 
+
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [searchValue, setSearchValue] = useState('');
   const [cartOpen, setCartOpen] = useState(false);
+  const [loading, setLoading] =useState(true)
+
 
   const allPrice = cartItems.reduce((currentValue, nextValue) => currentValue += nextValue.price, 0)
   
   useEffect(() => {
-      axios.get("https://614d9f35e3cf1f001712d223.mockapi.io/card").then(res => {
-        setItems(res.data)
-      })
-        axios.get("https://614d9f35e3cf1f001712d223.mockapi.io/cart").then(res => {
-          setCartItems(res.data)
-        })
-        axios.get("https://614d9f35e3cf1f001712d223.mockapi.io/favorites").then(res => {
-          setFavorites(res.data)
-        })
+    async function myData () {
+
+      const responseCart = await axios.get("https://614d9f35e3cf1f001712d223.mockapi.io/cart")
+      const responseFavorites = await axios.get("https://614d9f35e3cf1f001712d223.mockapi.io/favorites")
+      const responseCard = await axios.get("https://614d9f35e3cf1f001712d223.mockapi.io/card")
+
+      setLoading(false)
+
+      setCartItems(responseCart.data)
+      setFavorites(responseFavorites.data)
+      setItems(responseCard.data)
+    }
+
+    myData()
   }, []);
 
 
-  const onAddToCart = async (obj) => {
-    const { data } = await axios.post("https://614d9f35e3cf1f001712d223.mockapi.io/cart", obj)
-    setCartItems(prev => [...prev, data])
+  const onAddToCart = async obj => {
+    try{
+      if (cartItems.find(item => Number(item.id) === Number(obj.id))) {
+        axios.delete(`https://614d9f35e3cf1f001712d223.mockapi.io/cart/${obj.id}`)
+        setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)))
+      } else {
+        const { data } = await axios.post(`https://614d9f35e3cf1f001712d223.mockapi.io/cart`, obj)
+        setCartItems(prev => [...prev, data])
+        alert(JSON.stringify(obj.title))
+      }
+    }
+    catch (error){
+      console.error(error)
+    }
   }
 
-  const removeItem = (id) => {
+  const removeItem = id => {
     axios.delete(`https://614d9f35e3cf1f001712d223.mockapi.io/cart/${id}`)
     setCartItems(prev => prev.filter(item => item.id !== id))
   }
@@ -69,6 +88,8 @@ function App() {
           setSearchValue={setSearchValue}
           onAddFavorites={onAddFavorites}
           onAddToCart={onAddToCart}
+          cartItems={cartItems}
+          loading={loading}
         />
       </Route>
 
