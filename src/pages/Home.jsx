@@ -6,7 +6,6 @@ import Card from '../components/Card/Card'
 
 
 const Home = ({ items, searchValue, setSearchValue, onAddFavorites, onAddToCart, cartItems, loading }) => {
-  console.log(loading);
 
   const renderItems = () => {
     return (loading ? [...Array(12)] : items.filter(title => title.title.toLowerCase().includes(searchValue.toLowerCase())))

@@ -1,7 +1,15 @@
 import React from 'react';
 import Card from '../components/Card/Card';
+import { MainContext } from '../context';
 
-const Favorites = ({ favorites, onAddFavorites, onAddToCart }) => {
+
+
+const Favorites = ({ onAddFavorites, onAddToCart }) => {
+
+
+  const { favorites } = React.useContext(MainContext)
+
+  console.log(favorites);
     return (
         <div className="content">
         <div
