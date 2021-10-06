@@ -9,7 +9,6 @@ const Favorites = ({ onAddFavorites, onAddToCart }) => {
 
   const { favorites } = React.useContext(MainContext)
 
-  console.log(favorites);
     return (
         <div className="content">
         <div
@@ -31,9 +30,9 @@ const Favorites = ({ onAddFavorites, onAddToCart }) => {
                 id={item.id}
                 title={item.title}
                 price={item.price}
-                img={item.img}
+                imgURL={item.imgURL}
                 onClickFavorites={onAddFavorites}
-                onPlus={onAddToCart}
+                // onPlus={onAddToCart}
                 stateHeart={true}
               />
             ))

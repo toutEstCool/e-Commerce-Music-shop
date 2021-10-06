@@ -18,6 +18,8 @@ function App() {
   const [cartOpen, setCartOpen] = useState(false);
   const [loading, setLoading] =useState(true)
 
+  const [order, setOrder] = useState(null)
+
   const allPrice = cartItems.reduce((currentValue, nextValue) => currentValue += nextValue.price, 0)
   
   useEffect(() => {
@@ -40,9 +42,10 @@ function App() {
 
   const onAddToCart = async obj => {
     try{
-      if (cartItems.find(item => Number(item.id) === Number(obj.id))) {
-        axios.delete(`https://615c3596c298130017735fd3.mockapi.io/cart/${obj.id}`)
-        setCartItems(prev => prev.filter(item => Number(item.id) !== Number(obj.id)))
+      const findItem = cartItems.find(item => Number(item.parentId) === Number(obj.id))
+      if (findItem) {
+        await axios.delete(`https://615c3596c298130017735fd3.mockapi.io/cart/${findItem.id}`)
+        setCartItems(prev => prev.filter(item => Number(item.parentId) !== Number(obj.id)))
       } else {
         const { data } = await axios.post(`https://615c3596c298130017735fd3.mockapi.io/cart`, obj)
         setCartItems(prev => [...prev, data])
@@ -74,12 +77,33 @@ function App() {
       alert('Произошла ошибка...')
     }
   }
-  
 
+  const isItemAdded = id => {
+    return cartItems.some(obj => Number(obj.parentId) === Number(id))
+  }
 
+  const delayMy = () => new Promise(resolve => setTimeout(resolve, 1000))
 
-  return (
-    <MainContext.Provider value={ { items, cartItems, favorites} }>
+  const buyExample = async () => {
+    try {
+      const { data } = await axios.post('https://615c3596c298130017735fd3.mockapi.io/orders', {
+        items: cartItems
+      })
+      setOrder(data.id)
+      setCartItems([])
+
+      for (let i = 0; i < cartItems.length; i++) {
+        const item = cartItems[i]
+        console.log(item);
+        await axios.delete('https://615c3596c298130017735fd3.mockapi.io/cart/' + item.id)
+        await delayMy()
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+   return (
+    <MainContext.Provider value={ { items, cartItems, favorites, isItemAdded, buyExample } }>
     <div className="wrapper">
       {cartOpen && <SideBar onClose={() => setCartOpen(false)} items={cartItems} removeItem={removeItem} allPrice={allPrice}/>}
       <Header onClickCart={() => setCartOpen(true)} allPrice={allPrice}/>
