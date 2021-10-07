@@ -4,14 +4,14 @@ import { MainContext } from '../../context';
 const SideBar = ({ onClose, items = [], removeItem, allPrice, imgURL }) => {
 
   const { buyExample } = React.useContext(MainContext)
-const nds = allPrice * 0.007
+  const nds = allPrice * 0.007
 
   return (
     <div className="sideBarBlock">
     <div className="sideBar">
     <h2 style={{marginBottom: '30px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
       Корзина
-      <img style={{cursor: 'pointer', opacity: '.5'}} width={22} height={22} src="/images/close.svg" alt="close" onClick={onClose}/>
+      <img style={{cursor: 'pointer', opacity: '.5'}} width={22} height={22} src="images/close.svg" alt="close" onClick={onClose}/>
     </h2>
     <div className="items">
     {
@@ -39,7 +39,7 @@ const nds = allPrice * 0.007
           <b>{Math.round(nds)} сом.</b>
         </li>
       </ul>
-    <button onClick={buyExample} className="myButton">Оформить заказ <img src="/images/arrow.svg" alt="arrow"/></button>
+    <button onClick={buyExample} className="myButton">Оформить заказ <img src="images/arrow.svg" alt="arrow"/></button>
     </div>
     </div>
   </div>

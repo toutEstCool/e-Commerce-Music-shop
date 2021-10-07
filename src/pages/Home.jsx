@@ -35,11 +35,11 @@ const Home = ({ items, searchValue, setSearchValue, onAddFavorites, onAddToCart,
         >
           <h1>{searchValue ? `Поиск по запросу "${searchValue}"` : 'All Music'}</h1>
           <div className="search-block">
-            <img src="/images/search.svg" alt="serch" />
-            {searchValue && <img className="clear" width={22} height={22} src="/images/close.svg" alt="close" onClick={() => setSearchValue('')}/>}
+            <img src="images/search.svg" alt="serch" />
+            {searchValue && <img className="clear" width={22} height={22} src="images/close.svg" alt="close" onClick={() => setSearchValue('')}/>}
             <input
                type="text" 
-               placeholder="Поиск..." 
+               placeholder="Поиск..."
                value={searchValue}
                onChange={event => setSearchValue(event.target.value)}
             />

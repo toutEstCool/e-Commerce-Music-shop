@@ -7,10 +7,12 @@ import Header from "./components/Header/Header";
 import SideBar from "./components/SideBar/SideBar";
 import Home from "./pages/Home";
 import Favorites from "./pages/Favorites";
+import Orders from "./pages/Orders";
 
 
 
 function App() {
+
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [favorites, setFavorites] = useState([]);
@@ -24,16 +26,22 @@ function App() {
   
   useEffect(() => {
     async function myData () {
+      try {
+        const [ responseCart, responseFavorites, responseCard ] = await Promise.all([
+          axios.get("https://615c3596c298130017735fd3.mockapi.io/cart"),
+          axios.get("https://615c3596c298130017735fd3.mockapi.io/favorites"),
+          axios.get("https://615c3596c298130017735fd3.mockapi.io/card")
+        ])
 
-      const responseCart = await axios.get("https://615c3596c298130017735fd3.mockapi.io/cart")
-      const responseFavorites = await axios.get("https://615c3596c298130017735fd3.mockapi.io/favorites")
-      const responseCard = await axios.get("https://615c3596c298130017735fd3.mockapi.io/card")
+        setLoading(false)
 
-      setLoading(false)
+        setCartItems(responseCart.data)
+        setFavorites(responseFavorites.data)
+        setItems(responseCard.data)
 
-      setCartItems(responseCart.data)
-      setFavorites(responseFavorites.data)
-      setItems(responseCard.data)
+      } catch (error) {
+        alert('Произошла ошибка :(')
+      }
     }
 
     myData()
@@ -94,7 +102,6 @@ function App() {
 
       for (let i = 0; i < cartItems.length; i++) {
         const item = cartItems[i]
-        console.log(item);
         await axios.delete('https://615c3596c298130017735fd3.mockapi.io/cart/' + item.id)
         await delayMy()
       }
@@ -102,6 +109,10 @@ function App() {
       console.log(error);
     }
   }
+
+
+  
+
    return (
     <MainContext.Provider value={ { items, cartItems, favorites, isItemAdded, buyExample } }>
     <div className="wrapper">
@@ -126,6 +137,11 @@ function App() {
             // onAddToCart={onAddToCart}
           />
       </Route>
+
+      <Route path='/orders'>
+        <Orders />
+      </Route>
+
     </div>
     </MainContext.Provider>
   );

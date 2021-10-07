@@ -8,6 +8,7 @@ const Card = ({ id, title, price, imgURL, onPlus, onClickFavorites, stateHeart, 
   const [isFavorite, setIsFavorite] = useState(stateHeart)
 
   const { isItemAdded } = React.useContext(MainContext)
+  
 
   const obj = {title, price, imgURL, id, parentId: id}
 
@@ -37,7 +38,7 @@ const Card = ({ id, title, price, imgURL, onPlus, onClickFavorites, stateHeart, 
   </ContentLoader> :
               <>
               <div className={style.favorite}>
-            <img alt='Heart' onClick={onClickFavorite} src={isFavorite ? '/images/hearttrue.svg' : '/images/heartfalse.svg'}  />
+            <img alt='Heart' onClick={onClickFavorite} src={isFavorite ? 'images/hearttrue.svg' : 'images/heartfalse.svg'}  />
           </div>
           <img width={133} height={112} src={imgURL} alt="Music" />
           <h5>
@@ -49,7 +50,7 @@ const Card = ({ id, title, price, imgURL, onPlus, onClickFavorites, stateHeart, 
             <b>{price} сом.</b>
           </div>
           <button className={style.button} onClick={() => onClickPlus()}>
-            <img width={30} height={30} src={isItemAdded(id) ? '/images/addCard.svg': '/images/plus.svg'} alt="plus"/>
+            <img width={30} height={30} src={isItemAdded(id) ? 'images/addCard.svg': 'images/plus.svg'} alt="plus"/>
           </button>
         </div>
               </>
