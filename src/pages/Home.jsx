@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { MainContext } from '../context';
 
 
 
@@ -25,7 +24,7 @@ const Home = ({ items, searchValue, setSearchValue, onAddFavorites, onAddToCart,
   }
     return (
         <div className="content">
-        <div
+        <div className='allSearch'
           style={{
             display: "flex",
             alignItems: "center",
@@ -33,7 +32,7 @@ const Home = ({ items, searchValue, setSearchValue, onAddFavorites, onAddToCart,
             justifyContent: "space-between",
           }}
         >
-          <h1>{searchValue ? `Поиск по запросу "${searchValue}"` : 'All Music'}</h1>
+          <h1 className="allMusic">{searchValue ? `Поиск по запросу "${searchValue}"` : 'All Music'}</h1>
           <div className="search-block">
             <img src="images/search.svg" alt="serch" />
             {searchValue && <img className="clear" width={22} height={22} src="images/close.svg" alt="close" onClick={() => setSearchValue('')}/>}
@@ -46,7 +45,7 @@ const Home = ({ items, searchValue, setSearchValue, onAddFavorites, onAddToCart,
           </div>
         </div>
 
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
+        <div className="media" style={{ display: "flex", flexWrap: "wrap" }}>
           {renderItems()}
         </div>
       </div>

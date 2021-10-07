@@ -2,7 +2,7 @@
 {
   border: 1px solid #f8e8f8;
   padding: 30px;
-  max-width: 450px;
+  max-width: 370px;
   width: 100%;
   border-radius: 40px;
   background: #fff;
@@ -58,4 +58,17 @@
   height: 32px;
   width: 32px;
   cursor: pointer;
+}
+
+@media all and (max-width: 925px) {
+  .card {
+    max-width: 100%;
+  }
+}
+
+@media all and (max-width: 895px) {
+  .card {
+    max-width: 400px;
+    width: 100%;
+  }
 }

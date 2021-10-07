@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const Header = ({ onClickCart, allPrice }) => {
   return (
-    <header>
+    <header className="header">
       <Link to="/">
       <div className="headerLeft">
         <img width={40} height={40} src="images/logo.png" alt="logo" />
