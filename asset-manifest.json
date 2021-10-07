@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/e-Commerce-Music-shop/static/css/main.ef11dc3f.chunk.css",
+    "main.js": "/e-Commerce-Music-shop/static/js/main.b72b504d.chunk.js",
+    "main.js.map": "/e-Commerce-Music-shop/static/js/main.b72b504d.chunk.js.map",
+    "runtime-main.js": "/e-Commerce-Music-shop/static/js/runtime-main.69bd29b1.js",
+    "runtime-main.js.map": "/e-Commerce-Music-shop/static/js/runtime-main.69bd29b1.js.map",
+    "static/js/2.54b3d829.chunk.js": "/e-Commerce-Music-shop/static/js/2.54b3d829.chunk.js",
+    "static/js/2.54b3d829.chunk.js.map": "/e-Commerce-Music-shop/static/js/2.54b3d829.chunk.js.map",
+    "index.html": "/e-Commerce-Music-shop/index.html",
+    "static/css/main.ef11dc3f.chunk.css.map": "/e-Commerce-Music-shop/static/css/main.ef11dc3f.chunk.css.map",
+    "static/js/2.54b3d829.chunk.js.LICENSE.txt": "/e-Commerce-Music-shop/static/js/2.54b3d829.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.69bd29b1.js",
+    "static/js/2.54b3d829.chunk.js",
+    "static/css/main.ef11dc3f.chunk.css",
+    "static/js/main.b72b504d.chunk.js"
+  ]
+}
